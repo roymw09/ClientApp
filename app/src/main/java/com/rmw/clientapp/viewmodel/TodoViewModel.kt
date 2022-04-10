@@ -1,4 +1,4 @@
-package com.rmw.clientapp
+package com.rmw.clientapp.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -6,7 +6,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
+import com.rmw.clientapp.APIService
+import com.rmw.clientapp.Todo
+import kotlinx.coroutines.*
 import java.lang.Exception
 
 class TodoViewModel : ViewModel() {

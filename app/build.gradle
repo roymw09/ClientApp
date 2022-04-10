@@ -39,6 +39,10 @@ android {
         kotlinCompilerExtensionVersion compose_version
     }
     packagingOptions {
+        pickFirst 'META-INF/spring.tooling'
+        pickFirst 'META-INF/DEPENDENCIES'
+        pickFirst 'META-INF/spring.handlers'
+        pickFirst "META-INF/**"
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
@@ -46,7 +50,13 @@ android {
 }
 
 dependencies {
-
+/
+    implementation("org.springframework.boot:spring-boot-starter-security:2.6.6")
+    implementation("org.springframework.security.oauth:spring-security-oauth2:2.5.1.RELEASE")
+    implementation("org.springframework.boot:spring-boot-starter-web:2.6.6")
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-client:2.6.6")/
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-client:2.6.6")
+    implementation("com.google.code.gson:gson:2.6.1")
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"

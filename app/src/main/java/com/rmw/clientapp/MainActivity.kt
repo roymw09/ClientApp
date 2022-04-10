@@ -18,20 +18,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rmw.clientapp.ui.theme.ClientAppTheme
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
+import com.rmw.clientapp.viewmodel.TodoViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ClientAppTheme() {
-                //Conversation(SampleData.conversationSample)
                 TodoView(vm = TodoViewModel())
             }
         }
@@ -118,10 +114,6 @@ fun TodoView(vm: TodoViewModel) {
     )
 }
 
-
-
-
-
 data class Message(val author: String, val body: String)
 
 @Composable
@@ -188,7 +180,7 @@ fun MessageCard(msg: Message) {
 @Preview(showSystemUi = true)
 @Composable
 fun PreviewConversation() {
-    ClientAppTheme() {
+    ClientAppTheme {
         TodoView(vm = TodoViewModel())
     }
 }
