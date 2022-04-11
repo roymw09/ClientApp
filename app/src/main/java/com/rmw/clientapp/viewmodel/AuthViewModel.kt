@@ -4,9 +4,10 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.rmw.clientapp.repository.AuthAPIService.GithubConstants
 import com.rmw.clientapp.repository.AuthAPIService
-import com.rmw.clientapp.repository.AuthUser
+import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
 
+@DelicateCoroutinesApi
 class AuthViewModel(context: Context) : ViewModel() {
     val state = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())
     val githubAuthURLFull: String = GithubConstants.AUTHURL + "?client_id=" + GithubConstants.CLIENT_ID +

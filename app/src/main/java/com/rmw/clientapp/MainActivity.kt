@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -31,7 +32,7 @@ import com.rmw.clientapp.viewmodel.TodoViewModel
 @ExperimentalMaterialApi
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        var context = this
+        val context = this
         super.onCreate(savedInstanceState)
         setContent {
             ClientAppTheme() {
@@ -47,11 +48,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TodoView(vm: TodoViewModel, navController: NavController) {
-
     LaunchedEffect(Unit, block = {
-        vm.getTodoList()
+        //vm.getTodoList()
     })
-
+    vm.getTodoList()
     Scaffold(
         topBar = {
             TopAppBar(

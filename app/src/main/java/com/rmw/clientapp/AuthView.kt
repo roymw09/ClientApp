@@ -1,9 +1,6 @@
 package com.rmw.clientapp
 
 import android.content.Context
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,8 +19,9 @@ import androidx.navigation.NavController
 import com.rmw.clientapp.ui.theme.ClientAppTheme
 import com.rmw.clientapp.ui.theme.Shapes
 import com.rmw.clientapp.viewmodel.AuthViewModel
-import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.*
 
+@DelicateCoroutinesApi
 @ExperimentalMaterialApi
 @Composable
 fun AuthView(vm: AuthViewModel, navController: NavController) {
