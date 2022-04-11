@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.rmw.clientapp.repository.AuthAPIService.GithubConstants
 import com.rmw.clientapp.repository.AuthAPIService
+import com.rmw.clientapp.repository.AuthUser
 import java.util.concurrent.TimeUnit
 
 class AuthViewModel(context: Context) : ViewModel() {
@@ -16,7 +17,7 @@ class AuthViewModel(context: Context) : ViewModel() {
         authApi = AuthAPIService(context)
     }
 
-    fun AuthenticateUser() {
+    fun authenticateUser() {
         authApi.setupGithubWebViewDialog(githubAuthURLFull)
     }
 }

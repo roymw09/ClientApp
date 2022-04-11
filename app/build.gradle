@@ -50,11 +50,8 @@ android {
 }
 
 dependencies {
-/
-    implementation("org.springframework.boot:spring-boot-starter-security:2.6.6")
-    implementation("org.springframework.security.oauth:spring-security-oauth2:2.5.1.RELEASE")
-    implementation("org.springframework.boot:spring-boot-starter-web:2.6.6")
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-client:2.6.6")/
+    def nav_version = "2.4.2"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client:2.6.6")
     implementation("com.google.code.gson:gson:2.6.1")
     implementation 'androidx.core:core-ktx:1.7.0'

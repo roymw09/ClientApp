@@ -10,6 +10,8 @@ import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.compose.material.ExperimentalMaterialApi
+import com.rmw.clientapp.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -21,10 +23,13 @@ import java.net.URL
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.HttpsURLConnection
 
+data class AuthUser(var token: String, var id: Int, var username: String, var email: String, var url: String)
+
 class AuthAPIService(context: Context) {
-    lateinit var githubDialog: Dialog
-    var githubAuthURLFull: String
-    var context: Context
+    private lateinit var githubDialog: Dialog
+    private var githubAuthURLFull: String
+    private var context: Context
+    private lateinit var authUser: AuthUser
 
     object GithubConstants {
 
@@ -72,20 +77,6 @@ class AuthAPIService(context: Context) {
 
                 // Close the dialog after getting the authorization code
                 if (request.url.toString().contains("code=")) {
-                    githubDialog.dismiss()
-                }
-                return true
-            }
-            return false
-        }
-
-        // For API 19 and below
-        override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-            if (url.startsWith(GithubConstants.REDIRECT_URI)) {
-                handleUrl(url)
-
-                // Close the dialog after getting the authorization code
-                if (url.contains("?code=")) {
                     githubDialog.dismiss()
                 }
                 return true
@@ -168,6 +159,7 @@ class AuthAPIService(context: Context) {
                 val githubAvatarURL = jsonObject.getString("avatar_url")
                 Log.i("Github Avatar URL: ", githubAvatarURL)
 
+                authUser = AuthUser(token, githubId, githubDisplayName, githubEmail, githubAvatarURL)
             }
         }
     }
