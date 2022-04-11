@@ -58,7 +58,7 @@ class AuthAPIService(context: Context) {
     }
 
     private fun createUser(user: User) {
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Default) {
             val apiService = UserAPIService.getInstance()
             try {
                 _user = mutableStateOf(apiService.createUser(user))
@@ -70,7 +70,7 @@ class AuthAPIService(context: Context) {
     }
 
     fun checkIfUserExists(username: String) {
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Default) {
             val apiService = UserAPIService.getInstance()
             try {
                 _user = mutableStateOf(apiService.checkIfUserExists(username))
