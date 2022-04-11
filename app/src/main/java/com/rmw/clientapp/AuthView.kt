@@ -1,9 +1,6 @@
 package com.rmw.clientapp
 
 import android.content.Context
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,25 +15,16 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.rmw.clientapp.ui.theme.ClientAppTheme
 import com.rmw.clientapp.ui.theme.Shapes
 import com.rmw.clientapp.viewmodel.AuthViewModel
+import kotlinx.coroutines.*
 
-@ExperimentalMaterialApi
-class AuthActivity: ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ClientAppTheme() {
-                AuthView(vm = AuthViewModel(this))
-            }
-        }
-    }
-}
-
+@DelicateCoroutinesApi
 @ExperimentalMaterialApi
 @Composable
-fun AuthView(vm: AuthViewModel) {
+fun AuthView(vm: AuthViewModel, navController: NavController) {
     var isLoading by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
@@ -62,7 +50,8 @@ fun AuthView(vm: AuthViewModel) {
                     icon = painterResource(id = R.drawable.github_96),
                     onClick = {
                         isLoading = true
-                        vm.AuthenticateUser()
+                        vm.authenticateUser()
+                        navController.navigate("home")
                     }
                 )
             }
@@ -131,6 +120,6 @@ fun SignInButton(
 fun PreviewAuth() {
     ClientAppTheme {
         val context: Context? = null
-        AuthView(vm = AuthViewModel(context = context!!))
+        //AuthView(vm = AuthViewModel(context = context!!))
     }
 }
