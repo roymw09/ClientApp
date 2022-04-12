@@ -27,11 +27,10 @@ import androidx.navigation.compose.rememberNavController
 import com.rmw.clientapp.ui.theme.ClientAppTheme
 import com.rmw.clientapp.viewmodel.AuthViewModel
 import com.rmw.clientapp.viewmodel.TodoViewModel
-import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.*
 
 @ExperimentalMaterialApi
-@DelicateCoroutinesApi
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val context = this
         super.onCreate(savedInstanceState)
@@ -39,11 +38,16 @@ class MainActivity : ComponentActivity() {
             ClientAppTheme() {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "login") {
-                    composable("login") { AuthView(AuthViewModel(context), navController) }
+                    composable("login") { AuthView(AuthViewModel(context, navController), navController) }
                     composable("home") { TodoView(TodoViewModel(), navController) }
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cancel()
     }
 }
 

@@ -19,9 +19,7 @@ import androidx.navigation.NavController
 import com.rmw.clientapp.ui.theme.ClientAppTheme
 import com.rmw.clientapp.ui.theme.Shapes
 import com.rmw.clientapp.viewmodel.AuthViewModel
-import kotlinx.coroutines.*
 
-@DelicateCoroutinesApi
 @ExperimentalMaterialApi
 @Composable
 fun AuthView(vm: AuthViewModel, navController: NavController) {
@@ -51,7 +49,6 @@ fun AuthView(vm: AuthViewModel, navController: NavController) {
                     onClick = {
                         isLoading = true
                         vm.authenticateUser()
-                        navController.navigate("home")
                     }
                 )
             }

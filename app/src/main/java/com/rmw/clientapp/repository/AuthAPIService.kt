@@ -13,6 +13,7 @@ import android.webkit.WebViewClient
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.navigation.NavController
 import kotlinx.coroutines.*
 import org.json.JSONObject
 import org.json.JSONTokener
@@ -25,17 +26,16 @@ import javax.net.ssl.HttpsURLConnection
 // Data retrieved from Github Auth
 data class AuthUser(var token: String, var id: Int, var username: String, var email: String, var url: String)
 
-@DelicateCoroutinesApi
-class AuthAPIService(context: Context) {
-    private var _user = mutableStateOf(User(0, "", ""))
-    val user: User
-        get() = _user.value
+class AuthAPIService(context: Context, navController: NavController) {
+    private var _user: User by mutableStateOf(User(0, "", ""))
+    private val user: User
+        get() = _user
     var errorMessage: String by mutableStateOf("")
 
     private lateinit var githubDialog: Dialog
     private var githubAuthURLFull: String
     private var context: Context
-
+    private var navController: NavController
     object GithubConstants {
 
         val CLIENT_ID = "11b6d54ddbb4ad8a4c52"
@@ -49,19 +49,19 @@ class AuthAPIService(context: Context) {
 
     init {
         val state = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())
-
         githubAuthURLFull = GithubConstants.AUTHURL + "?client_id=" + GithubConstants.CLIENT_ID +
                 "&scope=" + GithubConstants.SCOPE + "&redirect_uri=" + GithubConstants.REDIRECT_URI +
                 "&state=" + state
 
         this.context = context
+        this.navController = navController
     }
 
     private fun createUser(user: User) {
-        GlobalScope.launch(Dispatchers.Default) {
+        MainScope().launch(Dispatchers.Default) {
             val apiService = UserAPIService.getInstance()
             try {
-                _user = mutableStateOf(apiService.createUser(user))
+                _user = apiService.createUser(user)
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
                 println(errorMessage)
@@ -70,10 +70,10 @@ class AuthAPIService(context: Context) {
     }
 
     fun checkIfUserExists(username: String) {
-        GlobalScope.launch(Dispatchers.Default) {
+        MainScope().launch(Dispatchers.Default) {
             val apiService = UserAPIService.getInstance()
             try {
-                _user = mutableStateOf(apiService.checkIfUserExists(username))
+                _user = apiService.checkIfUserExists(username)
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
                 println(errorMessage)
@@ -100,10 +100,6 @@ class AuthAPIService(context: Context) {
 
     @Suppress("OverridingDeprecatedMember")
     inner class GithubWebViewClient : WebViewClient() {
-        private var _authUserMutable = mutableStateOf(AuthUser("", 0, "", "", ""))
-        val authUser: AuthUser
-            get() = _authUserMutable.value
-
         @TargetApi(Build.VERSION_CODES.LOLLIPOP)
         override fun shouldOverrideUrlLoading(
             view: WebView?,
@@ -135,7 +131,7 @@ class AuthAPIService(context: Context) {
 
             val postParams =
                 "grant_type=" + grantType + "&code=" + code + "&redirect_uri=" + GithubConstants.REDIRECT_URI + "&client_id=" + GithubConstants.CLIENT_ID + "&client_secret=" + GithubConstants.CLIENT_SECRET
-            GlobalScope.launch(Dispatchers.Default) {
+            MainScope().launch(Dispatchers.Default) {
                 val url = URL(GithubConstants.TOKENURL)
                 val httpsURLConnection =
                     withContext(Dispatchers.IO) { url.openConnection() as HttpsURLConnection }
@@ -164,7 +160,7 @@ class AuthAPIService(context: Context) {
         }
 
         fun fetchGithubUserProfile(token: String) {
-            GlobalScope.launch(Dispatchers.Default) {
+            MainScope().launch(Dispatchers.Default) {
                 val tokenURLFull =
                     "https://api.github.com/user"
 
@@ -196,16 +192,11 @@ class AuthAPIService(context: Context) {
                 val githubAvatarURL = jsonObject.getString("avatar_url")
                 Log.i("Github Avatar URL: ", githubAvatarURL)
 
-                _authUserMutable = mutableStateOf(
-                    AuthUser(
-                        token,
-                        githubId,
-                        githubDisplayName,
-                        githubEmail,
-                        githubAvatarURL
-                    )
-                )
-                checkIfUserExists(authUser.username)
+                checkIfUserExists(githubDisplayName)
+
+                withContext(Dispatchers.Main) {
+                    navController.navigate("home")
+                }
             }
         }
     }
