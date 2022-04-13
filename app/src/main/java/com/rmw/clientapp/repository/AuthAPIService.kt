@@ -15,6 +15,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
 import kotlinx.coroutines.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.json.JSONObject
 import org.json.JSONTokener
 import java.io.OutputStreamWriter
@@ -22,9 +24,6 @@ import java.lang.Exception
 import java.net.URL
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.HttpsURLConnection
-
-// Data retrieved from Github Auth
-data class AuthUser(var token: String, var id: Int, var username: String, var email: String, var url: String)
 
 class AuthAPIService(context: Context, navController: NavController) {
     private var _user: User by mutableStateOf(User(0, "", ""))
@@ -194,8 +193,11 @@ class AuthAPIService(context: Context, navController: NavController) {
 
                 checkIfUserExists(githubDisplayName)
 
+                // pass the User object to the MainScreen
                 withContext(Dispatchers.Main) {
-                    navController.navigate("home")
+                    val params = User(null, githubDisplayName, null)
+                    val userArg = Uri.encode(Json.encodeToString(params))
+                    navController.navigate("home/$userArg")
                 }
             }
         }
