@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-const val BASE_URL = "https://hidden-tundra-10439.herokuapp.com"
+const val BASE_URL = "https://pubsub-gateway.herokuapp.com"
 
 interface APIService {
     @GET("/users/user/checkUser/{username}")
