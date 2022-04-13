@@ -1,5 +1,8 @@
 package com.rmw.clientapp.repository
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
@@ -8,7 +11,9 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 // Data retrieved from UMS
-data class User(var id: Int?, var username: String, var roles: String?)
+@Serializable
+@Parcelize
+data class User(var id: Int?, var username: String, var roles: String?) : Parcelable
 
 const val BASE_URL = "https://hidden-tundra-10439.herokuapp.com"
 interface UserAPIService {

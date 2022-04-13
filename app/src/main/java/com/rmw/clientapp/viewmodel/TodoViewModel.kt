@@ -1,30 +1,29 @@
 package com.rmw.clientapp.viewmodel
 
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rmw.clientapp.APIService
-import com.rmw.clientapp.Todo
+import com.rmw.clientapp.repository.User
 import kotlinx.coroutines.*
 import java.lang.Exception
 
 class TodoViewModel : ViewModel() {
-    private val _todoList = mutableStateListOf<Todo>()
+    private var _user: User by mutableStateOf(User(0, "", ""))
     var errorMessage: String by mutableStateOf("")
-    val todoList: List<Todo>
-        get() = _todoList
+    val user: User
+        get() = _user
 
-    fun getTodoList() {
+    fun getLoggedInUser(username: String) {
         viewModelScope.launch {
             val apiService = APIService.getInstance()
             try {
-                _todoList.clear()
-                _todoList.addAll(apiService.getTodos())
+                _user = apiService.getUser(username)
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
+                println(errorMessage)
             }
         }
     }
