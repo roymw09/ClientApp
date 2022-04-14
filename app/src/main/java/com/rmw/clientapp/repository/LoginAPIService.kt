@@ -15,8 +15,8 @@ import retrofit2.http.Path
 @Parcelize
 data class User(var id: Int?, var username: String, var roles: String?) : Parcelable
 
-const val BASE_URL = "https://hidden-tundra-10439.herokuapp.com"
-interface UserAPIService {
+const val BASE_URL = "https://pubsub-gateway.herokuapp.com"
+interface LoginAPIService {
 
     @POST("/users/user/create")
     suspend fun createUser(@Body user: User): User
@@ -25,13 +25,13 @@ interface UserAPIService {
     suspend fun checkIfUserExists(@Path("username") username: String): User
 
     companion object {
-        var apiService: UserAPIService? = null
-        fun getInstance(): UserAPIService {
+        var apiService: LoginAPIService? = null
+        fun getInstance(): LoginAPIService {
             if (apiService == null) {
                 apiService = Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
-                    .build().create(UserAPIService::class.java)
+                    .build().create(LoginAPIService::class.java)
             }
             return apiService!!
         }

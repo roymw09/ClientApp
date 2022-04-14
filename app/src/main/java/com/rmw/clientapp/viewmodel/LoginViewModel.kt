@@ -4,24 +4,24 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import com.rmw.clientapp.repository.AuthAPIService.GithubConstants
-import com.rmw.clientapp.repository.AuthAPIService
+import com.rmw.clientapp.repository.GithubAuthAPIService.GithubConstants
+import com.rmw.clientapp.repository.GithubAuthAPIService
 import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
 
-class AuthViewModel(context: Context, navController: NavController) : ViewModel() {
+class LoginViewModel(context: Context, navController: NavController) : ViewModel() {
     val state = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())
     val githubAuthURLFull: String = GithubConstants.AUTHURL + "?client_id=" + GithubConstants.CLIENT_ID +
             "&scope=" + GithubConstants.SCOPE + "&redirect_uri=" + GithubConstants.REDIRECT_URI +
             "&state=" + state
-    var authApi: AuthAPIService
+    var githubAuthApi: GithubAuthAPIService
     init {
-        authApi = AuthAPIService(context, navController)
+        githubAuthApi = GithubAuthAPIService(context, navController)
     }
 
     fun authenticateUser() {
         viewModelScope.launch {
-            authApi.setupGithubWebViewDialog(githubAuthURLFull)
+            githubAuthApi.setupGithubWebViewDialog(githubAuthURLFull)
         }
     }
 }

@@ -18,11 +18,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.rmw.clientapp.ui.theme.ClientAppTheme
 import com.rmw.clientapp.ui.theme.Shapes
-import com.rmw.clientapp.viewmodel.AuthViewModel
+import com.rmw.clientapp.viewmodel.LoginViewModel
 
 @ExperimentalMaterialApi
 @Composable
-fun AuthView(vm: AuthViewModel, navController: NavController) {
+fun AuthView(vm: LoginViewModel, navController: NavController) {
     var isLoading by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
