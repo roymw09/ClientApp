@@ -25,7 +25,7 @@ import java.net.URL
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.HttpsURLConnection
 
-class AuthAPIService(context: Context, navController: NavController) {
+class GithubAuthAPIService(context: Context, navController: NavController) {
     private var _user: User by mutableStateOf(User(0, "", ""))
     private val user: User
         get() = _user
@@ -58,7 +58,7 @@ class AuthAPIService(context: Context, navController: NavController) {
 
     private fun createUser(user: User) {
         MainScope().launch(Dispatchers.Default) {
-            val apiService = UserAPIService.getInstance()
+            val apiService = LoginAPIService.getInstance()
             try {
                 _user = apiService.createUser(user)
             } catch (e: Exception) {
@@ -70,7 +70,7 @@ class AuthAPIService(context: Context, navController: NavController) {
 
     fun checkIfUserExists(username: String) {
         MainScope().launch(Dispatchers.Default) {
-            val apiService = UserAPIService.getInstance()
+            val apiService = LoginAPIService.getInstance()
             try {
                 _user = apiService.checkIfUserExists(username)
             } catch (e: Exception) {
