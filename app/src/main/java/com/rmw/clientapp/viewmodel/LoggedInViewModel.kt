@@ -15,7 +15,7 @@ class LoggedInViewModel : ViewModel() {
     val user: User
         get() = _user
 
-    var _content = mutableStateListOf<Content>()
+    private var _content = mutableStateListOf<Content>()
     val content: List<Content>
         get() = _content
 
@@ -47,5 +47,9 @@ class LoggedInViewModel : ViewModel() {
                 println(errorMessage)
             }
         }
+    }
+
+    fun createContent(content: Content) {
+        // TODO - Create content
     }
 }
