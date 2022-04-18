@@ -1,7 +1,6 @@
 package com.rmw.clientapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -114,8 +113,6 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
                     }
                     if (vm.errorMessage.isEmpty()) {
                         DisplayPublisherMessages(contentList)
-                    } else {
-                        Log.i("API ERROR: ", vm.errorMessage)
                     }
                 }
             }
@@ -146,7 +143,6 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
                     }
                 )
                 CreateMessageButton(text = "Create Message", onClick = {
-                    vm.createContent(Content(0, 0, "test"))
                     showCreateMessage = false
                 })
             }

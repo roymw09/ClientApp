@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rmw.clientapp.Content
 import com.rmw.clientapp.LoggedInAPIService
+import com.rmw.clientapp.UserRole
 import com.rmw.clientapp.repository.User
 import kotlinx.coroutines.*
 import java.lang.Exception
@@ -18,6 +19,10 @@ class LoggedInViewModel : ViewModel() {
     private var _content = mutableStateListOf<Content>()
     val content: List<Content>
         get() = _content
+
+    private var _userPublisherRole: UserRole by mutableStateOf(UserRole(0, "", "", "", ""))
+    val userPublisherRole: UserRole
+        get() = _userPublisherRole
 
     var errorMessage: String by mutableStateOf("")
 
@@ -47,7 +52,27 @@ class LoggedInViewModel : ViewModel() {
         }
     }
 
-    fun createContent(content: Content) {
-        // TODO - Create content
+    fun getPublisherToken(userId: Int) {
+        viewModelScope.launch {
+            val apiService = LoggedInAPIService.getInstance()
+            try {
+                _userPublisherRole = apiService.getPublisherToken(userId)
+            } catch (e: Exception) {
+                errorMessage = e.message.toString()
+                Log.e("getPublisherToken", errorMessage)
+            }
+        }
+    }
+
+    fun createContent(token: String, content: Content) {
+        viewModelScope.launch {
+            val apiService = LoggedInAPIService.getInstance()
+            try {
+                apiService.createContent(token, content)
+            } catch (e: Exception) {
+                errorMessage = e.message.toString()
+                Log.e("createContent", errorMessage)
+            }
+        }
     }
 }
