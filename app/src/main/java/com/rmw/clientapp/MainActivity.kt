@@ -146,7 +146,6 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
                     }
                 )
                 CreateMessageButton(text = "Create Message", onClick = {
-                    vm.createContent(Content(0, 0, "test"))
                     showCreateMessage = false
                 })
             }
