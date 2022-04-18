@@ -27,12 +27,10 @@ class LoggedInViewModel : ViewModel() {
             try {
                 _content.clear()
                 _content.addAll(apiService.getPublisherContent())
-                Log.i("API SUCCESS: ", content.size.toString())
-                //content.add(apiService.getPublisherContent()) // TODO figure out how to flux to list
 
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
-                println(errorMessage)
+                Log.e("getPublisherContent", errorMessage)
             }
         }
     }
@@ -44,7 +42,7 @@ class LoggedInViewModel : ViewModel() {
                 _user = apiService.getLoggedInUser(username)
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
-                println(errorMessage)
+                Log.e("getLoggedInUserError", errorMessage)
             }
         }
     }
