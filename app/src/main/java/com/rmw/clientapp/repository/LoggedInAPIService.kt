@@ -11,6 +11,7 @@ const val BASE_URL = "https://pubsub-gateway.herokuapp.com"
 
 
 data class Content(var id: Int, var publisher_id: Int, var content: String)
+data class UserRole(var id: Int, var role_id: String, var role: String, var description: String, var refreshToken: String)
 
 interface LoggedInAPIService {
     @GET("/users/user/checkUser/{username}")
@@ -22,6 +23,9 @@ interface LoggedInAPIService {
     // on heroku yet
     @GET("/pub/content/findAll")
     suspend fun getPublisherContent(): List<Content>
+
+    @GET("/users/role/token/publisher/{userId}")
+    suspend fun getPublisherToken(@Path("userId") userId: Int)
 
     @GET("/pub/content/create/{token}")
     suspend fun createContent(@Path("token") token: String, @RequestBody content: Content)
