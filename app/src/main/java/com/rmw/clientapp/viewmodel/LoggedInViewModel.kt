@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rmw.clientapp.Content
 import com.rmw.clientapp.LoggedInAPIService
 import com.rmw.clientapp.repository.User
@@ -47,7 +48,15 @@ class LoggedInViewModel : ViewModel() {
         }
     }
 
-    fun createContent(content: Content) {
-        // TODO - Create content
+    fun createContent(token: String, content: Content) {
+        viewModelScope.launch {
+            val apiService = LoggedInAPIService.getInstance()
+            try {
+                apiService.createContent(token, content)
+            } catch (e: Exception) {
+                errorMessage = e.message.toString()
+                Log.e("createContent", errorMessage)
+            }
+        }
     }
 }

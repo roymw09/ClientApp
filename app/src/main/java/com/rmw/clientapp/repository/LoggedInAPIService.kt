@@ -1,6 +1,7 @@
 package com.rmw.clientapp
 
 import com.rmw.clientapp.repository.User
+import org.springframework.web.bind.annotation.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -21,6 +22,9 @@ interface LoggedInAPIService {
     // on heroku yet
     @GET("/pub/content/findAll")
     suspend fun getPublisherContent(): List<Content>
+
+    @GET("/pub/content/create/{token}")
+    suspend fun createContent(@Path("token") token: String, @RequestBody content: Content)
 
     companion object {
         var loggedInApiService: LoggedInAPIService? = null
