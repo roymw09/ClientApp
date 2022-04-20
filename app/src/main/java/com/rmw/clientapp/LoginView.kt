@@ -110,13 +110,3 @@ fun SignInButton(
         }
     }
 }
-
-@ExperimentalMaterialApi
-@Preview(showSystemUi = true)
-@Composable
-fun PreviewAuth() {
-    ClientAppTheme {
-        val context: Context? = null
-        //AuthView(vm = AuthViewModel(context = context!!))
-    }
-}
