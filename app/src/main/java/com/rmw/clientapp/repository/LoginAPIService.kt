@@ -1,19 +1,12 @@
 package com.rmw.clientapp.repository
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-import kotlinx.serialization.Serializable
+import com.rmw.clientapp.model.User
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
-
-// Data retrieved from UMS
-@Serializable
-@Parcelize
-data class User(var id: Int?, var username: String, var roles: String?) : Parcelable
 
 const val BASE_URL = "https://pubsub-gateway.herokuapp.com"
 interface LoginAPIService {
