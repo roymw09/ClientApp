@@ -21,7 +21,8 @@ import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.rmw.clientapp.repository.User
+import com.rmw.clientapp.model.Content
+import com.rmw.clientapp.model.User
 import com.rmw.clientapp.ui.theme.ClientAppTheme
 import com.rmw.clientapp.viewmodel.LoginViewModel
 import com.rmw.clientapp.viewmodel.LoggedInViewModel

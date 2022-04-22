@@ -4,10 +4,10 @@ import android.util.Log
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rmw.clientapp.Content
+import com.rmw.clientapp.model.Content
 import com.rmw.clientapp.LoggedInAPIService
-import com.rmw.clientapp.UserRole
-import com.rmw.clientapp.repository.User
+import com.rmw.clientapp.model.User
+import com.rmw.clientapp.model.UserRole
 import kotlinx.coroutines.*
 import java.lang.Exception
 
