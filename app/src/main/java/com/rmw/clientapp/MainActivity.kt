@@ -151,12 +151,3 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
         Spacer(modifier = Modifier.height(15.dp))
     }
 }
-
-//@OptIn(ExperimentalMaterialApi::class, kotlinx.serialization.ExperimentalSerializationApi::class)
-@Preview(showSystemUi = true)
-@Composable
-fun PreviewConversation() {
-    ClientAppTheme {
-        //CreateMessageView(LoggedInViewModel())
-    }
-}
