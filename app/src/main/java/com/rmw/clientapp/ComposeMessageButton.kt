@@ -42,11 +42,3 @@ fun ComposeMessageButton(
         }
     }
 }
-
-@Preview
-@Composable
-fun ButtonPreview() {
-    ClientAppTheme {
-        ComposeMessageButton(icon = painterResource(R.drawable.create_message), onClick = { /*TODO*/ })
-    }
-}
