@@ -52,18 +52,6 @@ class LoggedInViewModel : ViewModel() {
         }
     }
 
-    fun getPublisherToken(userId: Int) {
-        viewModelScope.launch {
-            val apiService = LoggedInAPIService.getInstance()
-            try {
-                _userPublisherRole = apiService.getPublisherToken(userId)
-            } catch (e: Exception) {
-                errorMessage = e.message.toString()
-                Log.e("getPublisherToken", errorMessage)
-            }
-        }
-    }
-
     fun createContent(token: String, content: Content) {
         viewModelScope.launch {
             val apiService = LoggedInAPIService.getInstance()
