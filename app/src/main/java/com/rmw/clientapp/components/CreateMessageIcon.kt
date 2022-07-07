@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.rmw.clientapp.ui.theme.ClientAppTheme
 
 @Composable
-fun ComposeMessageButton(
+fun CreateMessageIcon(
     icon: Painter,
     onClick: () -> Unit,
     isClicked: Boolean = false

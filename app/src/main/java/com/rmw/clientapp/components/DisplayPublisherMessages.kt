@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import com.rmw.clientapp.components.Message
+import com.rmw.clientapp.components.MessageCard
 import com.rmw.clientapp.model.Content
 
 @Composable
