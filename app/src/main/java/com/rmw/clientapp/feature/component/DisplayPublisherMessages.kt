@@ -1,12 +1,12 @@
-package com.rmw.clientapp
+package com.rmw.clientapp.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import com.rmw.clientapp.components.Message
-import com.rmw.clientapp.components.MessageCard
+import com.rmw.clientapp.feature.component.MessageCard
 import com.rmw.clientapp.model.Content
+import com.rmw.clientapp.model.Message
 
 @Composable
 fun DisplayPublisherMessages(messages: List<Content>) {

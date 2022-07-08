@@ -1,4 +1,4 @@
-package com.rmw.clientapp.components
+package com.rmw.clientapp.feature.component
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
@@ -17,8 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.rmw.clientapp.R
-
-data class Message(val author: String, val body: String)
+import com.rmw.clientapp.model.Message
 
 @Composable
 fun MessageCard(msg: Message) {

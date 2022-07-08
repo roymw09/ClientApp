@@ -16,7 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.rmw.clientapp.CreateMessageIcon
-import com.rmw.clientapp.DisplayPublisherMessages
+import com.rmw.clientapp.components.DisplayPublisherMessages
 import com.rmw.clientapp.model.Content
 import com.rmw.clientapp.model.User
 import com.rmw.clientapp.viewmodel.LoggedInViewModel
