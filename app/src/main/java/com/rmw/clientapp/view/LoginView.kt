@@ -15,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.rmw.clientapp.R
+import com.rmw.clientapp.components.SignInButton
 import com.rmw.clientapp.ui.theme.Shapes
 import com.rmw.clientapp.viewmodel.LoginViewModel
 
@@ -52,59 +53,4 @@ fun AuthView(vm: LoginViewModel, navController: NavController) {
             }
         }
     )
-}
-
-@ExperimentalMaterialApi
-@Composable
-fun SignInButton(
-    text: String,
-    loadingText: String = "Signing in...",
-    icon: Painter,
-    isLoading: Boolean = false,
-    shape: Shape = Shapes.medium,
-    borderColor: Color = Color.LightGray,
-    backgroundColor: Color = MaterialTheme.colors.surface,
-    progressIndicatorColor: Color = MaterialTheme.colors.primary,
-    onClick: () -> Unit
-) {
-    Surface(
-        modifier = Modifier.clickable(
-            enabled = !isLoading,
-            onClick = onClick
-        ),
-        shape = shape,
-        border = BorderStroke(width = 1.dp, color = borderColor),
-        color = backgroundColor
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(
-                    start = 12.dp,
-                    end = 16.dp,
-                    top = 12.dp,
-                    bottom = 12.dp
-                ),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center,
-        ) {
-            Icon(
-                painter = icon,
-                contentDescription = "SignInButton",
-                tint = Color.Unspecified
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-
-            Text(text = if (isLoading) loadingText else text)
-            if (isLoading) {
-                Spacer(modifier = Modifier.width(16.dp))
-                CircularProgressIndicator(
-                    modifier = Modifier
-                        .height(16.dp)
-                        .width(16.dp),
-                    strokeWidth = 2.dp,
-                    color = progressIndicatorColor
-                )
-            }
-        }
-    }
 }
