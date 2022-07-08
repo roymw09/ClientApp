@@ -11,11 +11,10 @@ import com.rmw.clientapp.CreateMessageButton
 import com.rmw.clientapp.viewmodel.LoggedInViewModel
 
 @Composable
-fun CreateMessage(vm: LoggedInViewModel){
+fun CreateMessage(onClick: () -> Unit){
     var userMessage by remember {
         mutableStateOf(TextFieldValue(""))
     }
-    var showCreateMessage = true
     Row(modifier = Modifier
         .fillMaxWidth()
         .padding(
@@ -35,8 +34,7 @@ fun CreateMessage(vm: LoggedInViewModel){
                 }
             )
             CreateMessageButton(text = "Create Message", onClick = {
-                // TODO - create a function in MainActivity that changes the value of this variable
-                showCreateMessage = false
+                onClick()
             })
         }
     }

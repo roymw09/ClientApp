@@ -33,7 +33,7 @@ fun LoggedInView(vm: LoggedInViewModel, navController: NavController) {
         vm.getLoggedInUser(user.username)
         vm.getPublisherContent()
     })
-    var showCreateMessage by remember { mutableStateOf(false) }
+    var showCreateMessageBox by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -62,9 +62,9 @@ fun LoggedInView(vm: LoggedInViewModel, navController: NavController) {
                         )
                         CreateMessageIcon(
                             icon = painterResource(id = R.drawable.create_message),
-                            isClicked = showCreateMessage,
+                            isClicked = showCreateMessageBox,
                             onClick = {
-                                showCreateMessage = true
+                                showCreateMessageBox = true
                             }
                         )
                     }
@@ -75,8 +75,10 @@ fun LoggedInView(vm: LoggedInViewModel, navController: NavController) {
         },
         content = {
             Column {
-                if (showCreateMessage) {
-                    CreateMessage(vm)
+                if (showCreateMessageBox) {
+                    CreateMessage(onClick = {
+                        showCreateMessageBox = false;
+                    })
                 }
                 if (vm.errorMessage.isEmpty()) {
                     DisplayPublisherMessages(contentList)
