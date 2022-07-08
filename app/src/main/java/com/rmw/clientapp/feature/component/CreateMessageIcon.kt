@@ -1,4 +1,4 @@
-package com.rmw.clientapp
+package com.rmw.clientapp.feature.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

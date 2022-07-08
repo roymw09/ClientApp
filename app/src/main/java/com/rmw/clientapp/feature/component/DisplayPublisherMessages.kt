@@ -1,4 +1,4 @@
-package com.rmw.clientapp.components
+package com.rmw.clientapp.feature.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn

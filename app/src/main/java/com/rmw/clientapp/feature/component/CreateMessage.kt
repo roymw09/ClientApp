@@ -1,4 +1,4 @@
-package com.rmw.clientapp.components
+package com.rmw.clientapp.feature.component
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.TextField
@@ -7,8 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import com.rmw.clientapp.CreateMessageButton
-import com.rmw.clientapp.viewmodel.LoggedInViewModel
+import com.rmw.clientapp.feature.component.CreateMessageButton
 
 @Composable
 fun CreateMessage(onClick: () -> Unit){
