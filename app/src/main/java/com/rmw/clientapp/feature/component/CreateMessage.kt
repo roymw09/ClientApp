@@ -7,10 +7,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import com.rmw.clientapp.feature.component.CreateMessageButton
 
 @Composable
-fun CreateMessage(onClick: () -> Unit){
+fun CreateMessage(onClick: () -> Unit): TextFieldValue {
     var userMessage by remember {
         mutableStateOf(TextFieldValue(""))
     }
@@ -38,4 +37,5 @@ fun CreateMessage(onClick: () -> Unit){
         }
     }
     Spacer(modifier = Modifier.height(15.dp))
+    return userMessage
 }

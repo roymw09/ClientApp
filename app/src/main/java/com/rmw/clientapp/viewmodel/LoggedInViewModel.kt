@@ -16,7 +16,7 @@ class LoggedInViewModel : ViewModel() {
     val user: User
         get() = _user
 
-    private var _content = mutableStateListOf<Content>()
+    private val _content = mutableStateListOf<Content>()
     val content: List<Content>
         get() = _content
 
@@ -26,13 +26,17 @@ class LoggedInViewModel : ViewModel() {
 
     var errorMessage: String by mutableStateOf("")
 
+    init {
+        getPublisherContent()
+    }
+
     fun getPublisherContent() {
         viewModelScope.launch {
             val apiService = LoggedInAPIService.getInstance()
             try {
-                _content.clear()
-                _content.addAll(apiService.getPublisherContent())
-
+                //_content.clear()
+                //_content.addAll(apiService.getPublisherContent())
+                _content.add(Content(null, 1, "test content"))
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
                 Log.e("getPublisherContent", errorMessage)
@@ -52,11 +56,18 @@ class LoggedInViewModel : ViewModel() {
         }
     }
 
-    fun createContent(token: String, content: Content) {
+    fun createContent(publisherId: Int, message: String) {
         viewModelScope.launch {
-            val apiService = LoggedInAPIService.getInstance()
+            // Services are currently not online, so for now all content
+            // is only being stored in an array and not in the publisher service database
+            /* TODO - uncomment apiService variable and call to apiService create content
+                method once services are online
+             */
+            //val apiService = LoggedInAPIService.getInstance()
             try {
-                apiService.createContent(token, content)
+                val content = Content(null, publisherId, message)
+                //apiService.createContent(token, content)
+                _content.add(content)
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
                 Log.e("createContent", errorMessage)

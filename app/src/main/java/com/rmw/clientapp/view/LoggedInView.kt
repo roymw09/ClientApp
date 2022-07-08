@@ -26,14 +26,16 @@ import com.rmw.clientapp.feature.component.CreateMessage
 @Composable
 fun LoggedInView(vm: LoggedInViewModel, navController: NavController) {
     val user: User = navController.currentBackStackEntry?.arguments?.getParcelable("userArg")!!
-    val contentList: List<Content> by remember {
-        mutableStateOf(vm.content)
-    }
-    LaunchedEffect(Unit, block = {
+    // reverse content list to display newest - oldest
+    val contentList = vm.content.reversed()
+
+    LaunchedEffect(Unit) {
         vm.getLoggedInUser(user.username)
-        vm.getPublisherContent()
-    })
+    }
     var showCreateMessageBox by remember { mutableStateOf(false) }
+    // Temporary test data
+    val userContent = Content(null, 1, "")
+    //vm.getPublisherContent()
 
     Scaffold(
         topBar = {
@@ -76,9 +78,10 @@ fun LoggedInView(vm: LoggedInViewModel, navController: NavController) {
         content = {
             Column {
                 if (showCreateMessageBox) {
-                    CreateMessage(onClick = {
-                        showCreateMessageBox = false;
-                    })
+                    userContent.content = CreateMessage(onClick = {
+                        showCreateMessageBox = false
+                        vm.createContent(userContent.publisher_id, userContent.content)
+                    }).text
                 }
                 if (vm.errorMessage.isEmpty()) {
                     DisplayPublisherMessages(contentList)
