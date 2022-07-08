@@ -14,10 +14,7 @@ class LoginViewModel(context: Context, navController: NavController) : ViewModel
     val githubAuthURLFull: String = GithubConstants.AUTHURL + "?client_id=" + GithubConstants.CLIENT_ID +
             "&scope=" + GithubConstants.SCOPE + "&redirect_uri=" + GithubConstants.REDIRECT_URI +
             "&state=" + state
-    var githubAuthApi: GithubAuthAPIService
-    init {
-        githubAuthApi = GithubAuthAPIService(context, navController)
-    }
+    var githubAuthApi: GithubAuthAPIService = GithubAuthAPIService(context, navController)
 
     fun authenticateUser() {
         viewModelScope.launch {
