@@ -15,13 +15,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.rmw.clientapp.CreateMessageIcon
-import com.rmw.clientapp.components.DisplayPublisherMessages
+import com.rmw.clientapp.feature.component.CreateMessageIcon
+import com.rmw.clientapp.feature.component.DisplayPublisherMessages
 import com.rmw.clientapp.model.Content
 import com.rmw.clientapp.model.User
 import com.rmw.clientapp.viewmodel.LoggedInViewModel
 import com.rmw.clientapp.R
-import com.rmw.clientapp.components.CreateMessage
+import com.rmw.clientapp.feature.component.CreateMessage
 
 @Composable
 fun LoggedInView(vm: LoggedInViewModel, navController: NavController) {
