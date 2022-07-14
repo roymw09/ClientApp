@@ -60,7 +60,7 @@ class LoggedInViewModel : ViewModel() {
         viewModelScope.launch {
             // Services are currently not online, so for now all content
             // is only being stored in an array and not in the publisher service database
-            /* TODO - uncomment apiService variable and call to apiService create content
+            /* TODO - uncomment apiService variable and make a call to the apiService's create content
                 method once services are online
              */
             //val apiService = LoggedInAPIService.getInstance()

@@ -16,7 +16,7 @@ interface LoggedInAPIService {
     suspend fun getLoggedInUser(@Path("username") username: String): User
 
     // TODO
-    // Should eventually take a publisher Id that the user subscribes to
+    // Should eventually take the publisher Id of a publisher that the user subscribes to
     // but for now just retrieve all content since the subscriber service is not
     // on heroku yet
     @GET("/pub/content/findAll")
