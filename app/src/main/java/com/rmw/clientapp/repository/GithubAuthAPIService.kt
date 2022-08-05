@@ -40,7 +40,7 @@ class GithubAuthAPIService(context: Context, navController: NavController) {
 
         val CLIENT_ID = "11b6d54ddbb4ad8a4c52"
         val CLIENT_SECRET = "cd0051d83b1594a3040ddbfe01602074cf4977e2"
-        val REDIRECT_URI = "https://hidden-tundra-10439.herokuapp.com/login/oauth2/code/github"
+        val REDIRECT_URI = "http://localhost:8081/login/oauth2/code/github"
         val SCOPE = "read:user,user:email"
         val AUTHURL = "https://github.com/login/oauth/authorize"
         val TOKENURL = "https://github.com/login/oauth/access_token"
