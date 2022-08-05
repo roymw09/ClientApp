@@ -2,14 +2,14 @@ package com.rmw.clientapp
 
 import com.rmw.clientapp.model.Content
 import com.rmw.clientapp.model.User
-import com.rmw.clientapp.model.UserRole
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
-const val BASE_URL = "https://pubsub-gateway.herokuapp.com"
+const val BASE_URL = "http://192.168.2.56:8080"
 
 interface LoggedInAPIService {
     @GET("/users/user/checkUser/{username}")
@@ -22,11 +22,8 @@ interface LoggedInAPIService {
     @GET("/pub/content/findAll")
     suspend fun getPublisherContent(): List<Content>
 
-    @GET("/users/role/token/publisher/{userId}")
-    suspend fun getPublisherToken(@Path("userId") userId: Int): UserRole
-
-    @GET("/pub/content/create/{token}")
-    suspend fun createContent(@Path("token") token: String, @Body content: Content): Content
+    @POST("/pub/content/create")
+    suspend fun createContent(@Body content: Content): Content
 
     companion object {
         var loggedInApiService: LoggedInAPIService? = null
