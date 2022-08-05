@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.rmw.clientapp.ui.theme.ClientAppTheme
 import com.rmw.clientapp.view.AuthView
+import com.rmw.clientapp.view.CurrentUserProfileView
 import com.rmw.clientapp.view.LoggedInView
 import com.rmw.clientapp.viewmodel.LoginViewModel
 import com.rmw.clientapp.viewmodel.LoggedInViewModel
@@ -33,6 +34,7 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
                             type = UserParameterType()
                         })
                     ) { LoggedInView(LoggedInViewModel(), navController) }
+                    composable("currentUserProfile") { CurrentUserProfileView() }
                 }
             }
         }
