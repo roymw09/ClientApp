@@ -34,9 +34,8 @@ class LoggedInViewModel : ViewModel() {
         viewModelScope.launch {
             val apiService = LoggedInAPIService.getInstance()
             try {
-                //_content.clear()
-                //_content.addAll(apiService.getPublisherContent())
-                _content.add(Content(null, 1, "test content"))
+                _content.clear()
+                _content.addAll(apiService.getPublisherContent())
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
                 Log.e("getPublisherContent", errorMessage)
@@ -63,10 +62,10 @@ class LoggedInViewModel : ViewModel() {
             /* TODO - uncomment apiService variable and make a call to the apiService's create content
                 method once services are online
              */
-            //val apiService = LoggedInAPIService.getInstance()
+            val apiService = LoggedInAPIService.getInstance()
             try {
                 val content = Content(null, publisherId, message)
-                //apiService.createContent(token, content)
+                apiService.createContent(content)
                 _content.add(content)
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
