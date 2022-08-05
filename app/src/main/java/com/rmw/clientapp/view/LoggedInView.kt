@@ -22,6 +22,7 @@ import com.rmw.clientapp.model.User
 import com.rmw.clientapp.viewmodel.LoggedInViewModel
 import com.rmw.clientapp.R
 import com.rmw.clientapp.feature.component.CreateMessage
+import java.lang.NullPointerException
 
 @Composable
 fun LoggedInView(vm: LoggedInViewModel, navController: NavController) {
@@ -31,9 +32,10 @@ fun LoggedInView(vm: LoggedInViewModel, navController: NavController) {
 
     LaunchedEffect(Unit) {
         vm.getLoggedInUser(user.username)
+        vm.getPublisherContent()
     }
     var showCreateMessageBox by remember { mutableStateOf(false) }
-    // Temporary test data
+    // Temporary test data for now
     val userContent = Content(null, 1, "")
     //vm.getPublisherContent()
 
@@ -73,7 +75,8 @@ fun LoggedInView(vm: LoggedInViewModel, navController: NavController) {
                 },
                 Modifier
                     .fillMaxWidth()
-                    .size(70.dp))
+                    .size(70.dp)
+            )
         },
         content = {
             Column {
